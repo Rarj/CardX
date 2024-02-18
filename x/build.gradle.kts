@@ -31,9 +31,22 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
 }
 
 dependencies {
+
+    implementation(libs.activity.compose)
+    implementation(platform(libs.compose.bom))
+    implementation(libs.ui.tooling.preview)
+    implementation(libs.constraint.layout)
+    implementation(libs.compose.foundation)
+    implementation(libs.material3)
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
