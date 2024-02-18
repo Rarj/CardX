@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "CardX"
 include(":app")
+include(":x")
