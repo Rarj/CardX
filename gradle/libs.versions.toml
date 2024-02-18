@@ -12,7 +12,6 @@ appcompat = "1.6.1"
 material = "1.11.0"
 constraint-layout = "1.0.1"
 compose-foundation = "1.6.1"
-ui-tooling = "1.6.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
