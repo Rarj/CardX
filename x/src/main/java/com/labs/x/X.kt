@@ -1,9 +1,12 @@
 package com.labs.x
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -11,42 +14,182 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontSynthesis
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.Typeface
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 
 @Composable
-fun X() {
+fun X(
+    titleCard: String,
+    @DrawableRes iconCard: Int,
+    numberCard: String,
+    nameCard: String,
+    validDate: String,
+    modifier: Modifier = Modifier,
+) {
     ConstraintLayout(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp)
-            .clip(shape = RoundedCornerShape(20.dp))
+        modifier = modifier
+            .width(360.dp)
+            .height(184.dp)
+            .clip(shape = RoundedCornerShape(15.dp))
             .background(color = Color.White)
-            .padding(16.dp)
+            .padding(16.dp),
     ) {
-        Text(
-            text = "Paypal",
+        val (title, iconType, iconChip, cardNumber, cardName, validThru) = createRefs()
+
+        TitleText(
+            title = titleCard,
             modifier = Modifier
-                .wrapContentSize(),
-            fontSize = 18.sp,
-            fontFamily = FontFamily(Font(R.font.sono_medium))
+                .wrapContentSize()
+                .constrainAs(title) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                }
         )
 
+        BankIcon(
+            icon = iconCard,
+            modifier = Modifier
+                .size(48.dp)
+                .constrainAs(iconType) {
+                    top.linkTo(title.top)
+                    end.linkTo(parent.end)
+                    bottom.linkTo(title.bottom)
+                }
+        )
+
+        BankChip(
+            modifier = Modifier
+                .padding(top = 24.dp, start = 16.dp)
+                .constrainAs(iconChip) {
+                    top.linkTo(title.bottom)
+                    start.linkTo(parent.start)
+                }
+        )
+
+        CardNumber(
+            number = numberCard,
+            modifier = Modifier
+                .padding(top = 24.dp, start = 16.dp)
+                .wrapContentSize()
+                .constrainAs(cardNumber) {
+                    top.linkTo(iconChip.bottom)
+                    start.linkTo(parent.start)
+                }
+        )
+
+        CardName(
+            name = nameCard,
+            modifier = Modifier
+                .padding(top = 4.dp, start = 16.dp)
+                .wrapContentSize()
+                .constrainAs(cardName) {
+                    top.linkTo(cardNumber.bottom)
+                    start.linkTo(parent.start)
+                }
+        )
+
+        ValidThru(
+            date = validDate,
+            modifier = Modifier
+                .padding(top = 4.dp, start = 16.dp)
+                .wrapContentSize()
+                .constrainAs(validThru) {
+                    top.linkTo(cardName.top)
+                    end.linkTo(parent.end)
+                }
+        )
 
     }
 }
 
+@Composable
+private fun TitleText(
+    title: String,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = title,
+        modifier = modifier,
+        fontSize = 18.sp,
+        fontFamily = FontFamily(Font(R.font.sono_medium)),
+    )
+}
+
+@Composable
+private fun BankIcon(
+    @DrawableRes icon: Int,
+    modifier: Modifier = Modifier,
+) {
+    Image(
+        modifier = modifier,
+        painter = painterResource(id = icon),
+        contentDescription = "Bank Icon"
+    )
+}
+
+@Composable
+private fun BankChip(
+    modifier: Modifier = Modifier,
+) {
+    Image(
+        modifier = modifier,
+        painter = painterResource(id = R.drawable.ic_chip),
+        contentDescription = "Chip"
+    )
+}
+
+@Composable
+private fun CardNumber(
+    number: String,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = number,
+        modifier = modifier,
+        fontSize = 20.sp,
+        fontFamily = FontFamily(Font(R.font.sono_semibold)),
+    )
+}
+
+@Composable
+private fun CardName(
+    name: String,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = name,
+        modifier = modifier,
+        fontSize = 12.sp,
+        fontFamily = FontFamily(Font(R.font.sono_regular)),
+    )
+}
+
+@Composable
+private fun ValidThru(
+    date: String,
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        text = date,
+        modifier = modifier,
+        fontSize = 12.sp,
+        fontFamily = FontFamily(Font(R.font.sono_semibold)),
+    )
+}
+
 @Preview
 @Composable
-fun XPreview() {
-    X()
+private fun XPreview() {
+    X(
+        titleCard = "Paypal",
+        iconCard = R.drawable.ic_visa,
+        numberCard = "•••• •••• •••• 1234",
+        nameCard = "Personal Name",
+        validDate = "01/24",
+    )
 }
