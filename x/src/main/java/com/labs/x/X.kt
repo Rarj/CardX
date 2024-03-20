@@ -1,26 +1,22 @@
 package com.labs.x
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.constraintlayout.compose.ConstraintLayout
 
 @Composable
 fun X(
@@ -31,160 +27,63 @@ fun X(
     validDate: String,
     modifier: Modifier = Modifier,
 ) {
-    ConstraintLayout(
+    var rotated by remember { mutableStateOf(false) }
+
+    val rotationAnimation by animateFloatAsState(
+        targetValue = if (rotated) 180f else 0f,
+        animationSpec = tween(500),
+        label = "",
+    )
+
+    val frontAnimation by animateFloatAsState(
+        targetValue = if (!rotated) 1f else 0f,
+        animationSpec = tween(500),
+        label = "",
+    )
+
+    val backAnimation by animateFloatAsState(
+        targetValue = if (rotated) 1f else 0f,
+        animationSpec = tween(500),
+        label = "",
+    )
+
+    Column(
         modifier = modifier
-            .width(360.dp)
-            .height(184.dp)
-            .clip(shape = RoundedCornerShape(15.dp))
-            .background(color = Color.White)
-            .padding(16.dp),
+            .wrapContentSize()
+            .background(color = Color.Transparent)
+            .graphicsLayer {
+                rotationY = rotationAnimation
+                cameraDistance = 8 * density
+            }
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null,
+            ) {
+                rotated = !rotated
+            }
     ) {
-        val (title, iconType, iconChip, cardNumber, cardName, validThru) = createRefs()
-
-        TitleText(
-            title = titleCard,
-            modifier = Modifier
-                .wrapContentSize()
-                .constrainAs(title) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                }
-        )
-
-        BankIcon(
-            icon = iconCard,
-            modifier = Modifier
-                .size(48.dp)
-                .constrainAs(iconType) {
-                    top.linkTo(title.top)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(title.bottom)
-                }
-        )
-
-        BankChip(
-            modifier = Modifier
-                .padding(top = 24.dp, start = 16.dp)
-                .constrainAs(iconChip) {
-                    top.linkTo(title.bottom)
-                    start.linkTo(parent.start)
-                }
-        )
-
-        CardNumber(
-            number = numberCard,
-            modifier = Modifier
-                .padding(top = 24.dp, start = 16.dp)
-                .wrapContentSize()
-                .constrainAs(cardNumber) {
-                    top.linkTo(iconChip.bottom)
-                    start.linkTo(parent.start)
-                }
-        )
-
-        CardName(
-            name = nameCard,
-            modifier = Modifier
-                .padding(top = 4.dp, start = 16.dp)
-                .wrapContentSize()
-                .constrainAs(cardName) {
-                    top.linkTo(cardNumber.bottom)
-                    start.linkTo(parent.start)
-                }
-        )
-
-        ValidThru(
-            date = validDate,
-            modifier = Modifier
-                .padding(top = 4.dp, start = 16.dp)
-                .wrapContentSize()
-                .constrainAs(validThru) {
-                    top.linkTo(cardName.top)
-                    end.linkTo(parent.end)
-                }
-        )
-
+        if (rotated.not()) {
+            FrontCard(
+                titleCard = titleCard,
+                iconCard = iconCard,
+                numberCard = numberCard,
+                nameCard = nameCard,
+                validDate = validDate,
+                frontAnimation = frontAnimation,
+            )
+        } else {
+            BackCard(
+                cvvNumber = "123",
+                backAnimation = backAnimation,
+                rotationAnimation = rotationAnimation,
+            )
+        }
     }
 }
 
+@Preview(device = "id:pixel_7_pro", showSystemUi = true, showBackground = true)
 @Composable
-private fun TitleText(
-    title: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = title,
-        modifier = modifier,
-        fontSize = 18.sp,
-        fontFamily = FontFamily(Font(R.font.sono_medium)),
-    )
-}
-
-@Composable
-private fun BankIcon(
-    @DrawableRes icon: Int,
-    modifier: Modifier = Modifier,
-) {
-    Image(
-        modifier = modifier,
-        painter = painterResource(id = icon),
-        contentDescription = "Bank Icon"
-    )
-}
-
-@Composable
-private fun BankChip(
-    modifier: Modifier = Modifier,
-) {
-    Image(
-        modifier = modifier,
-        painter = painterResource(id = R.drawable.ic_chip),
-        contentDescription = "Chip"
-    )
-}
-
-@Composable
-private fun CardNumber(
-    number: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = number,
-        modifier = modifier,
-        fontSize = 20.sp,
-        fontFamily = FontFamily(Font(R.font.sono_semibold)),
-    )
-}
-
-@Composable
-private fun CardName(
-    name: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = name,
-        modifier = modifier,
-        fontSize = 12.sp,
-        fontFamily = FontFamily(Font(R.font.sono_regular)),
-    )
-}
-
-@Composable
-private fun ValidThru(
-    date: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = date,
-        modifier = modifier,
-        fontSize = 12.sp,
-        fontFamily = FontFamily(Font(R.font.sono_semibold)),
-    )
-}
-
-@Preview
-@Composable
-private fun XPreview() {
+private fun FrontCardPreview() {
     X(
         titleCard = "Paypal",
         iconCard = R.drawable.ic_visa,
