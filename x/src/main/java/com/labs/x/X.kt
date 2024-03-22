@@ -25,6 +25,7 @@ fun X(
     numberCard: String,
     nameCard: String,
     validDate: String,
+    cvvNumber: String,
     modifier: Modifier = Modifier,
 ) {
     var rotated by remember { mutableStateOf(false) }
@@ -73,7 +74,7 @@ fun X(
             )
         } else {
             BackCard(
-                cvvNumber = "123",
+                cvvNumber = cvvNumber,
                 backAnimation = backAnimation,
                 rotationAnimation = rotationAnimation,
             )
@@ -90,5 +91,6 @@ private fun FrontCardPreview() {
         numberCard = "•••• •••• •••• 1234",
         nameCard = "Personal Name",
         validDate = "01/24",
+        cvvNumber = "123",
     )
 }
