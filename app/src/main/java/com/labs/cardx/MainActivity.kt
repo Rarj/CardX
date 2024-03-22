@@ -48,7 +48,8 @@ private fun DebitCard() {
         iconCard = R.drawable.ic_visa,
         numberCard = "1234 1234 1234 1234",
         nameCard = "Big Smoke",
-        validDate = "01/28"
+        validDate = "01/28",
+        cvvNumber = "555"
     )
 }
 
