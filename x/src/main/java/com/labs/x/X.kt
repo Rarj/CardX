@@ -18,6 +18,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 
+/**
+ * [X] is a [Composable] that will show a Front and Back of the Card.
+ * by default its using a Flip Animation with 500ms of the duration of the animation.
+ *
+ * @param titleCard is [String] that will show as Issuing Bank (i.e: Visa, Mastercard)
+ * @param iconCard is [DrawableRes] that will show as logo of Issuing Bank (i.e: Visa, Mastercard)
+ * @param numberCard is [String] that represent Account Number
+ * @param nameCard is [String] that represent Cardholder Name
+ * @param validDate is [String] that will show an Expiration Date of the Card (i.e: 01/24).
+ *                  First two digits (01) is equals with January, that is represent a Month and starts with 0 if month is single digit.
+ *                  Last two digits (24) is equals with 2024, that is represent a Last-Two-Digit of Expiration Year.
+ * @param cvvNumber is [String] that will show a 3 or 4 digit number
+ * @param modifier An ordered, immutable collection of modifier elements that decorate or
+ *                 add behavior to Compose UI elements.
+ *                 For example, backgrounds, padding and click event listeners decorate or add behavior to rows, text or buttons.
+ * @see Modifier
+ */
 @Composable
 fun X(
     titleCard: String,

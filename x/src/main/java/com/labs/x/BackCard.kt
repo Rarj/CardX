@@ -21,6 +21,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 
+/**
+ * [BackCard] function is [Composable] that will generate a certain view of the Back part of the Card.
+ *
+ * @param cvvNumber is [String] that will show a 3 or 4 digit number
+ * @param backAnimation is [Float] that represent a duration that show flip animation.
+ * @param rotationAnimation is [Float] that represent a duration that show flip animation.
+ */
 @Composable
 internal fun BackCard(
     cvvNumber: String,
@@ -65,6 +72,17 @@ internal fun BackCard(
     }
 }
 
+/**
+ * [CVV] function is [Composable] that will generate a CVV.
+ *
+ * @param cvvNumber is [String] that will show a 3 or 4 digit number
+ * @param modifier An ordered, immutable collection of modifier elements that decorate or
+ *                 add behavior to Compose UI elements.
+ *                 For example, backgrounds, padding and click event listeners decorate or add behavior to rows, text or buttons.
+ * @param backAnimation is [Float] that represent a duration that show flip animation.
+ * @param rotationAnimation is [Float] that represent a duration that show flip animation.
+ * @see Modifier
+ */
 @Composable
 private fun CVV(
     cvvNumber: String,
