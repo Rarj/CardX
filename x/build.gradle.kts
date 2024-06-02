@@ -1,11 +1,55 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
+import com.vanniktech.maven.publish.SonatypeHost
+
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    id("com.vanniktech.maven.publish") version "0.28.0"
+}
+
+mavenPublishing {
+    publishToMavenCentral(host = SonatypeHost.CENTRAL_PORTAL)
+
+    signAllPublications()
+
+    pom {
+        coordinates(groupId = "com.rioarj.labs", artifactId = "cardx", version = "0.1.0")
+
+        name.set("CardX")
+        description.set("CardX, a cutting-edge Kotlin library designed to revolutionize the way you preview Debit Cards within your Android applications.\n" +
+                "\n" +
+                "Leveraging the power of Jetpack Compose, CardX offers a seamless integration that enables developers to effortlessly showcase debit card designs with stunning visual appeal. What sets CardX apart is its incorporation of flip animation, adding an engaging and dynamic element to the card preview experience.\n" +
+                "\n" +
+                "With CardX, you can captivate users with realistic card flips, creating an immersive and interactive environment that elevates the user experience to new heights.")
+        url.set("https://github.com/Rarj/CardX")
+
+        licenses {
+            license {
+                name.set("The Apache License, Version 2.0")
+                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+            }
+        }
+
+        developers {
+            developer {
+                name.set("Rio Arj")
+                email.set("developer.arj@gmail.com")
+                organizationUrl.set("https://github.com/Rarj/")
+                organization.set("Rio Arj")
+            }
+        }
+
+        scm {
+            connection.set("scm:git:git://github.com/Rarj/CardX.git")
+            developerConnection.set("scm:git:ssh://github.com:Rarj/CardX.git")
+            url.set("https://github.com/Rarj/CardX/")
+        }
+
+    }
+
 }
 
 android {
-    namespace = "com.labs.x"
+    namespace = "com.rioarj.labs"
     compileSdk = 34
 
     defaultConfig {
@@ -42,7 +86,6 @@ android {
 dependencies {
 
     implementation(libs.activity.compose)
-    implementation(platform(libs.compose.bom))
     implementation(libs.ui.tooling.preview)
     implementation(libs.constraint.layout)
     implementation(libs.compose.foundation)
