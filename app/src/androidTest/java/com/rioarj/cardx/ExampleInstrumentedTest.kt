@@ -1,4 +1,4 @@
-package com.labs.cardx
+package com.rioarj.cardx
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

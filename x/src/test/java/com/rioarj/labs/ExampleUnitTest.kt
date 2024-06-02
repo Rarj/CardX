@@ -1,4 +1,4 @@
-package com.labs.x
+package com.rioarj.labs
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.labs.cardx.ui.theme
+package com.rioarj.cardx.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

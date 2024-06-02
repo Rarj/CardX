@@ -1,4 +1,4 @@
-package com.labs.x
+package com.rioarj.labs
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth

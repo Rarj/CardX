@@ -1,4 +1,4 @@
-package com.labs.cardx
+package com.rioarj.cardx
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,9 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.labs.cardx.ui.theme.CardXTheme
-import com.labs.x.R
-import com.labs.x.X
+import com.rioarj.cardx.ui.theme.CardXTheme
+import com.rioarj.labs.X
+import com.rioarj.labs.R as RUiKit
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
 private fun DebitCard() {
     X(
         titleCard = "Paypal",
-        iconCard = R.drawable.ic_visa,
+        iconCard = RUiKit.drawable.ic_visa,
         numberCard = "1234 1234 1234 1234",
         nameCard = "Big Smoke",
         validDate = "01/28",

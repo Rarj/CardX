@@ -1,4 +1,4 @@
-package com.labs.cardx
+package com.rioarj.cardx
 
 import org.junit.Test
 

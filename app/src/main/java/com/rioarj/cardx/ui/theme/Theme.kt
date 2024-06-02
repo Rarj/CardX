@@ -1,4 +1,4 @@
-package com.labs.cardx.ui.theme
+package com.rioarj.cardx.ui.theme
 
 import android.app.Activity
 import android.os.Build

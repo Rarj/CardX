@@ -1,4 +1,4 @@
-package com.labs.x
+package com.rioarj.labs
 
 import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
