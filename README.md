@@ -10,9 +10,35 @@ With CardX, you can captivate users with realistic card flips, creating an immer
 # Demo 📱
 <img height="460" width="250" src="https://github.com/Rarj/CardX/assets/23600466/1842856e-2efc-4a6a-a8ce-e29fb5e99eae"/>
 
+# Setting up the dependency
+## Gradle
+Add the dependency below to your `build.gradle` file:
+
+```gradle
+dependencies {
+    implementation("com.rioarj.labs:cardx:0.1.0")
+}
+```
+
+## Version Catalog
+Add the dependency below to your toml `libs.versions.toml` file:
+```toml
+[versions]
+cardx = "0.1.0"
+
+[libraries]
+cardx = { group = "com.rioarj.labs", name = "cardx", version.ref = "cardx" }
+```
+
+```gradle
+dependencies {
+    implementation(libs.cardx)
+}
+```
+
 # Usage
 You can implement with a straightforward by typing `X(...)`
-```
+```kotlin
   X(
     titleCard = "Paypal",
     iconCard = R.drawable.ic_visa,
