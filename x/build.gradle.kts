@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
     id("com.vanniktech.maven.publish") version "0.28.0"
+    alias(libs.plugins.paparazzi)
 }
 
 mavenPublishing {
